@@ -1,0 +1,321 @@
+{
+  "suites": [
+    {
+      "name": "Standard Suite",
+      "code": "core",
+      "description": "Common classes and commands for all applications.",
+      "commands": [
+        {
+          "name": "count",
+          "code": "corecnte",
+          "description": "Return the number of elements of a particular class within an object.",
+          "cocoaClass": "NSCountCommand",
+          "directParameter": {
+            "type": "specifier",
+            "description": "the object whose elements are to be counted"
+          },
+          "parameters": [
+            {
+              "name": "each",
+              "code": "kocl",
+              "type": "type",
+              "optional": true,
+              "description": "The class of objects to be counted.",
+              "cocoaKey": "ObjectClass"
+            }
+          ],
+          "result": {
+            "type": "integer",
+            "description": "the number of elements"
+          }
+        },
+        {
+          "name": "delete",
+          "code": "coredelo",
+          "description": "Delete an object.",
+          "cocoaClass": "NSDeleteCommand",
+          "accessGroup": {
+            "identifier": "*"
+          },
+          "directParameter": {
+            "type": "specifier",
+            "description": "The object(s) to delete."
+          }
+        },
+        {
+          "name": "duplicate",
+          "code": "coreclon",
+          "description": "Copy an object.",
+          "cocoaClass": "NSCloneCommand",
+          "accessGroup": {
+            "identifier": "*"
+          },
+          "directParameter": {
+            "type": "specifier",
+            "requiresAccess": "r",
+            "description": "The object(s) to copy."
+          },
+          "parameters": [
+            {
+              "name": "to",
+              "code": "insh",
+              "type": "location specifier",
+              "optional": true,
+              "description": "The location for the new copy or copies.",
+              "cocoaKey": "ToLocation"
+            },
+            {
+              "name": "with properties",
+              "code": "prdt",
+              "type": "record",
+              "optional": true,
+              "description": "Properties to set in the new copy or copies right away.",
+              "cocoaKey": "WithProperties"
+            }
+          ]
+        },
+        {
+          "name": "exists",
+          "code": "coredoex",
+          "description": "Verify that an object exists.",
+          "cocoaClass": "NSExistsCommand",
+          "accessGroup": {
+            "identifier": "*"
+          },
+          "directParameter": {
+            "type": "any",
+            "requiresAccess": "r",
+            "description": "The object(s) to check."
+          },
+          "result": {
+            "type": "boolean",
+            "description": "Did the object(s) exist?"
+          }
+        },
+        {
+          "name": "make",
+          "code": "corecrel",
+          "description": "Create a new object.",
+          "cocoaClass": "NSCreateCommand",
+          "accessGroup": {
+            "identifier": "*"
+          },
+          "parameters": [
+            {
+              "name": "new",
+              "code": "kocl",
+              "type": "type",
+              "description": "The class of the new object.",
+              "cocoaKey": "ObjectClass"
+            },
+            {
+              "name": "at",
+              "code": "insh",
+              "type": "location specifier",
+              "optional": true,
+              "description": "The location at which to insert the object.",
+              "cocoaKey": "Location"
+            },
+            {
+              "name": "with data",
+              "code": "data",
+              "type": "any",
+              "optional": true,
+              "description": "The initial contents of the object.",
+              "cocoaKey": "ObjectData"
+            },
+            {
+              "name": "with properties",
+              "code": "prdt",
+              "type": "record",
+              "optional": true,
+              "description": "The initial values for properties of the object.",
+              "cocoaKey": "KeyDictionary"
+            }
+          ],
+          "result": {
+            "type": "specifier",
+            "description": "The new object."
+          }
+        }
+      ],
+      "classes": [
+        {
+          "name": "application",
+          "code": "capp",
+          "description": "The application's top-level scripting object.",
+          "cocoaClass": "Application",
+          "properties": [
+            {
+              "name": "name",
+              "code": "pnam",
+              "type": "text",
+              "access": "r",
+              "description": "The name of the application."
+            },
+            {
+              "name": "frontmost",
+              "code": "pisf",
+              "type": "boolean",
+              "access": "r",
+              "description": "Is this the active application?",
+              "cocoaKey": "isActive"
+            },
+            {
+              "name": "version",
+              "code": "vers",
+              "type": "text",
+              "access": "r",
+              "description": "The version number of the application."
+            }
+          ],
+          "elements": [
+            {
+              "type": "window",
+              "access": "r",
+              "cocoaKey": "orderedWindows"
+            }
+          ],
+          "respondsTo": [
+            {
+              "command": "open",
+              "cocoaMethod": "handleOpenScriptCommand:"
+            },
+            {
+              "command": "print",
+              "cocoaMethod": "handlePrintScriptCommand:"
+            },
+            {
+              "command": "quit",
+              "cocoaMethod": "handleQuitScriptCommand:"
+            }
+          ]
+        },
+        {
+          "name": "window",
+          "code": "cwin",
+          "description": "A window.",
+          "cocoaClass": "NSWindow",
+          "properties": [
+            {
+              "name": "name",
+              "code": "pnam",
+              "type": "text",
+              "access": "r",
+              "description": "The title of the window.",
+              "cocoaKey": "title"
+            },
+            {
+              "name": "id",
+              "code": "ID  ",
+              "type": "integer",
+              "access": "r",
+              "description": "The unique identifier of the window.",
+              "cocoaKey": "uniqueID"
+            },
+            {
+              "name": "index",
+              "code": "pidx",
+              "type": "integer",
+              "description": "The index of the window, ordered front to back.",
+              "cocoaKey": "orderedIndex"
+            },
+            {
+              "name": "bounds",
+              "code": "pbnd",
+              "type": "rectangle",
+              "description": "The bounding rectangle of the window.",
+              "cocoaKey": "boundsAsQDRect"
+            },
+            {
+              "name": "closeable",
+              "code": "hclb",
+              "type": "boolean",
+              "access": "r",
+              "description": "Does the window have a close button?",
+              "cocoaKey": "hasCloseBox"
+            },
+            {
+              "name": "miniaturizable",
+              "code": "ismn",
+              "type": "boolean",
+              "access": "r",
+              "description": "Does the window have a minimize button?",
+              "cocoaKey": "isMiniaturizable"
+            },
+            {
+              "name": "miniaturized",
+              "code": "pmnd",
+              "type": "boolean",
+              "description": "Is the window minimized right now?",
+              "cocoaKey": "isMiniaturized"
+            },
+            {
+              "name": "resizable",
+              "code": "prsz",
+              "type": "boolean",
+              "access": "r",
+              "description": "Can the window be resized?",
+              "cocoaKey": "isResizable"
+            },
+            {
+              "name": "visible",
+              "code": "pvis",
+              "type": "boolean",
+              "description": "Is the window visible right now?",
+              "cocoaKey": "isVisible"
+            },
+            {
+              "name": "zoomable",
+              "code": "iszm",
+              "type": "boolean",
+              "access": "r",
+              "description": "Does the window have a zoom button?",
+              "cocoaKey": "isZoomable"
+            },
+            {
+              "name": "zoomed",
+              "code": "pzum",
+              "type": "boolean",
+              "description": "Is the window zoomed right now?",
+              "cocoaKey": "isZoomed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Browser Deputy Suite",
+      "code": "BDYS",
+      "description": "Browser Deputy specific classes and commands.",
+      "classes": [
+        {
+          "name": "application",
+          "code": "capp",
+          "description": "The application's top-level scripting object.",
+          "cocoaClass": "NSApplication"
+        }
+      ],
+      "commands": [
+        {
+          "name": "activate Browser Deputy",
+          "code": "bdactive",
+          "description": "Activate Browser Deputy.",
+          "cocoaClass": "ASActivateCommand"
+        },
+        {
+          "name": "search for tabs",
+          "code": "bdactive",
+          "description": "Search for tabs in Browser Deputy.",
+          "cocoaClass": "ASSearchTabsCommand"
+        },
+        {
+          "name": "copy page URL",
+          "code": "bdactive",
+          "description": "Copy page URL with Browser Deputy.",
+          "cocoaClass": "ASCopyPageURLCommand"
+        }
+      ]
+    }
+  ]
+}
