@@ -1,0 +1,314 @@
+Below is a complete loss-less JSON representation of the XML you supplied.
+Every attribute and node present in the source document has a matching key/value here; nothing has been omitted.
+
+{
+  "dictionary": {
+    "xmlns:xi": "http://www.w3.org/2003/XInclude",
+    "includes": [
+      {
+        "href": "file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef",
+        "xpointer": "/dictionary/suite"
+      }
+    ],
+    "suites": [
+      {
+        "name": "Safari suite",
+        "code": "sfri",
+        "description": "Safari specific classes",
+        "classExtensions": [
+          {
+            "extends": "window",
+            "description": "A Safari window.",
+            "cocoa": {
+              "class": "BrowserWindow"
+            },
+            "properties": [
+              {
+                "type": "tab",
+                "name": "current tab",
+                "code": "cTab",
+                "description": "The current tab.",
+                "cocoa": { "key": "currentTabViewItem" }
+              }
+            ],
+            "elements": [
+              {
+                "type": "tab",
+                "cocoa": { "key": "orderedTabViewItems" }
+              }
+            ]
+          },
+          {
+            "extends": "document",
+            "description": "A Safari document representing the active tab in a window.",
+            "cocoa": {
+              "class": "BrowserDocument"
+            },
+            "properties": [
+              {
+                "type": "text",
+                "name": "source",
+                "code": "conT",
+                "access": "r",
+                "description": "The HTML source of the web page currently loaded in the document.",
+                "cocoa": { "key": "source" }
+              },
+              {
+                "type": "text",
+                "name": "URL",
+                "code": "pURL",
+                "description": "The current URL of the document.",
+                "cocoa": { "key": "URLString" }
+              },
+              {
+                "type": "text",
+                "name": "text",
+                "code": "ctxt",
+                "access": "r",
+                "description": "The text of the web page currently loaded in the document. Modifications to text aren't reflected on the web page.",
+                "cocoa": { "key": "text" }
+              }
+            ],
+            "respondsTo": [
+              {
+                "command": "do JavaScript",
+                "cocoa": { "method": "handleDoJavaScriptCommand:" }
+              },
+              {
+                "command": "email contents",
+                "cocoa": { "method": "handleEmailContentsCommand:" }
+              },
+              {
+                "command": "search the web",
+                "cocoa": { "method": "handleSearchTheWebCommand:" }
+              }
+            ]
+          }
+        ],
+        "classes": [
+          {
+            "name": "tab",
+            "plural": "tabs",
+            "code": "bTab",
+            "description": "A Safari window tab.",
+            "cocoa": {
+              "class": "BrowserTabViewItem"
+            },
+            "properties": [
+              {
+                "type": "text",
+                "name": "source",
+                "code": "conT",
+                "access": "r",
+                "description": "The HTML source of the web page currently loaded in the tab.",
+                "cocoa": { "key": "source" }
+              },
+              {
+                "type": "text",
+                "name": "URL",
+                "code": "pURL",
+                "description": "The current URL of the tab.",
+                "cocoa": { "key": "URLString" }
+              },
+              {
+                "type": "number",
+                "name": "index",
+                "code": "pidx",
+                "access": "r",
+                "description": "The index of the tab, ordered left to right.",
+                "cocoa": { "key": "orderedIndex" }
+              },
+              {
+                "type": "text",
+                "name": "text",
+                "code": "ctxt",
+                "access": "r",
+                "description": "The text of the web page currently loaded in the tab. Modifications to text aren't reflected on the web page.",
+                "cocoa": { "key": "text" }
+              },
+              {
+                "type": "boolean",
+                "name": "visible",
+                "code": "pvis",
+                "access": "r",
+                "description": "Whether the tab is currently visible.",
+                "cocoa": { "key": "isVisible" }
+              },
+              {
+                "type": "text",
+                "name": "name",
+                "code": "pnam",
+                "access": "r",
+                "description": "The name of the tab.",
+                "cocoa": { "key": "title" }
+              }
+            ],
+            "respondsTo": [
+              {
+                "command": "do JavaScript",
+                "cocoa": { "method": "handleDoJavaScriptCommand:" }
+              },
+              {
+                "command": "email contents",
+                "cocoa": { "method": "handleEmailContentsCommand:" }
+              },
+              {
+                "command": "close",
+                "cocoa": { "method": "handleCloseScriptCommand:" }
+              },
+              {
+                "command": "search the web",
+                "cocoa": { "method": "handleSearchTheWebCommand:" }
+              }
+            ]
+          },
+          {
+            "name": "sourceProvider",
+            "code": "srcP",
+            "hidden": true,
+            "cocoa": { "class": "ScriptPageSourceProvider" },
+            "respondsTo": [
+              {
+                "command": "get",
+                "cocoa": { "method": "handleGetScriptCommand:" }
+              }
+            ]
+          },
+          {
+            "name": "contentsProvider",
+            "code": "txtP",
+            "hidden": true,
+            "cocoa": { "class": "ScriptPageContentsProvider" },
+            "respondsTo": [
+              {
+                "command": "get",
+                "cocoa": { "method": "handleGetScriptCommand:" }
+              }
+            ]
+          }
+        ],
+        "commands": [
+          {
+            "name": "add reading list item",
+            "code": "sfriarli",
+            "description": "Add a new Reading List item with the given URL. Allows a custom title and preview text to be specified.",
+            "cocoa": { "class": "AddReadingListItemCommand" },
+            "directParameter": {
+              "type": "text",
+              "description": "URL of the Reading List item"
+            },
+            "parameters": [
+              {
+                "type": "text",
+                "name": "and preview text",
+                "code": "rlip",
+                "optional": true,
+                "description": "Preview text for the Reading List item, usually the first few sentences of the article",
+                "cocoa": { "key": "PreviewText" }
+              },
+              {
+                "type": "text",
+                "name": "with title",
+                "code": "rlit",
+                "optional": true,
+                "description": "Title of the Reading List item",
+                "cocoa": { "key": "Title" }
+              }
+            ]
+          },
+          {
+            "name": "do JavaScript",
+            "code": "sfridojs",
+            "description": "Applies a string of JavaScript code to a document.",
+            "cocoa": { "class": "DoJavaScriptCommand" },
+            "directParameter": {
+              "type": "text",
+              "description": "The JavaScript code to evaluate."
+            },
+            "parameters": [
+              {
+                "name": "in",
+                "code": "dcnm",
+                "optional": true,
+                "description": "The tab that the JavaScript should be evaluated in.",
+                "cocoa": { "key": "Target" },
+                "types": ["document", "tab"]
+              }
+            ],
+            "result": { "type": "any" }
+          },
+          {
+            "name": "email contents",
+            "code": "sfrimlct",
+            "description": "Emails the contents of a tab.",
+            "cocoa": { "class": "EmailContents" },
+            "parameters": [
+              {
+                "name": "of",
+                "code": "dcnm",
+                "optional": true,
+                "description": "The tab to send.",
+                "cocoa": { "key": "Target" },
+                "types": ["tab", "document"]
+              }
+            ]
+          },
+          {
+            "name": "search the web",
+            "code": "sfrisrch",
+            "description": "Searches the web using Safari's current search provider.",
+            "cocoa": { "class": "SearchTheWeb" },
+            "parameters": [
+              {
+                "name": "in",
+                "code": "dcnm",
+                "optional": true,
+                "description": "The tab that the search results should shown in.",
+                "cocoa": { "key": "Target" },
+                "types": ["document", "tab"]
+              },
+              {
+                "type": "text",
+                "name": "for",
+                "code": "qury",
+                "description": "The query to search for.",
+                "cocoa": { "key": "Query" }
+              }
+            ]
+          },
+          {
+            "name": "show bookmarks",
+            "code": "sfriopbk",
+            "description": "Shows Safari's bookmarks.",
+            "cocoa": { "class": "ShowBookmarks" }
+          },
+          {
+            "name": "show extensions preferences",
+            "code": "sfrissep",
+            "hidden": true,
+            "description": "Show Safari Extensions preferences.",
+            "cocoa": { "class": "ShowExtensionsPreferences" },
+            "accessGroup": { "identifier": "com.apple.Safari.show-extensions-preferences" },
+            "directParameter": {
+              "type": "text",
+              "description": "The identifier of the extension to select."
+            }
+          },
+          {
+            "name": "dispatch message to extension",
+            "code": "sfridste",
+            "hidden": true,
+            "description": "Dispatch a message to a Safari Extension.",
+            "cocoa": { "class": "DispatchMessageToExtension" },
+            "accessGroup": { "identifier": "com.apple.Safari.dispatch-message-to-extension" },
+            "directParameter": {
+              "type": "any",
+              "description": "A dictionary describing the message"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
