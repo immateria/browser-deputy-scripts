@@ -1,0 +1,206 @@
+{
+  "dictionary": {
+    "suites": [
+      {
+        "name": "Chromium Suite",
+        "code": "CrSu",
+        "description": "Common classes and commands for Chrome.",
+        "classExtensions": [
+          {
+            "description": "The application's top-level scripting object.",
+            "extends": "application",
+            "cocoa": { "class": "BrowserCrApplication" },
+            "properties": [
+              {
+                "name": "bookmarks bar",
+                "code": "ChBB",
+                "description": "The bookmarks bar bookmark folder.",
+                "type": "bookmark folder",
+                "access": "r",
+                "cocoa": { "key": "bookmarksBar" }
+              },
+              {
+                "name": "other bookmarks",
+                "code": "ChOB",
+                "description": "The other bookmarks bookmark folder.",
+                "type": "bookmark folder",
+                "access": "r",
+                "cocoa": { "key": "otherBookmarks" }
+              }
+            ],
+            "elements": [
+              {
+                "description": "Contains the bookmarks bar and other bookmarks folder.",
+                "type": "bookmark folder",
+                "access": "r",
+                "cocoa": { "key": "bookmarkFolders" }
+              }
+            ]
+          }
+        ],
+        "classes": [
+          {
+            "name": "tab",
+            "code": "CrTb",
+            "description": "A tab.",
+            "cocoa": { "class": "TabAppleScript" },
+            "properties": [
+              {
+                "name": "id",
+                "code": "ID  ",
+                "description": "Unique ID of the tab.",
+                "type": "text",
+                "access": "r",
+                "cocoa": { "key": "uniqueID" }
+              },
+              {
+                "name": "title",
+                "code": "pnam",
+                "description": "The title of the tab.",
+                "type": "text",
+                "access": "r"
+              },
+              {
+                "name": "URL",
+                "code": "URL ",
+                "description": "The url visible to the user.",
+                "type": "text"
+              },
+              {
+                "name": "loading",
+                "code": "ldng",
+                "description": "Is loading?",
+                "type": "boolean",
+                "access": "r"
+              }
+            ],
+            "respondsTo": [
+              { "command": "undo",          "cocoa": { "method": "handlesUndoScriptCommand:" } },
+              { "command": "redo",          "cocoa": { "method": "handlesRedoScriptCommand:" } },
+              { "command": "cut selection", "cocoa": { "method": "handlesCutScriptCommand:" } },
+              { "command": "copy selection","cocoa": { "method": "handlesCopyScriptCommand:" } },
+              { "command": "paste selection","cocoa": { "method": "handlesPasteScriptCommand:" } },
+              { "command": "select all",   "cocoa": { "method": "handlesSelectAllScriptCommand:" } },
+              { "command": "go back",      "cocoa": { "method": "handlesGoBackScriptCommand:" } },
+              { "command": "go forward",   "cocoa": { "method": "handlesGoForwardScriptCommand:" } },
+              { "command": "reload",       "cocoa": { "method": "handlesReloadScriptCommand:" } },
+              { "command": "stop",         "cocoa": { "method": "handlesStopScriptCommand:" } },
+              { "command": "print",        "cocoa": { "method": "handlesPrintScriptCommand:" } },
+              { "command": "view source",  "cocoa": { "method": "handlesViewSourceScriptCommand:" } },
+              { "command": "save",         "cocoa": { "method": "handlesSaveScriptCommand:" } },
+              { "command": "close",        "cocoa": { "method": "handlesCloseScriptCommand:" } },
+              { "command": "execute",      "cocoa": { "method": "handlesExecuteJavascriptScriptCommand:" } }
+            ]
+          },
+          {
+            "name": "bookmark folder",
+            "code": "CrBF",
+            "description": "A bookmarks folder that contains other bookmarks folder and bookmark items.",
+            "cocoa": { "class": "BookmarkFolderAppleScript" },
+            "elements": [
+              {
+                "description": "The bookmark folders present within.",
+                "type": "bookmark folder",
+                "cocoa": { "key": "bookmarkFolders" }
+              },
+              {
+                "description": "The bookmarks present within.",
+                "type": "bookmark item",
+                "cocoa": { "key": "bookmarkItems" }
+              }
+            ],
+            "properties": [
+              {
+                "name": "id",
+                "code": "ID  ",
+                "description": "Unique ID of the bookmark folder.",
+                "type": "text",
+                "access": "r",
+                "cocoa": { "key": "uniqueID" }
+              },
+              {
+                "name": "title",
+                "code": "pnam",
+                "description": "The title of the folder.",
+                "type": "text"
+              },
+              {
+                "name": "index",
+                "code": "pidx",
+                "description": "Returns the index with respect to its parent bookmark folder.",
+                "type": "number",
+                "access": "r",
+                "cocoa": { "key": "index" }
+              }
+            ]
+          },
+          {
+            "name": "bookmark item",
+            "code": "CrBI",
+            "description": "An item consists of an URL and the title of a bookmark",
+            "cocoa": { "class": "BookmarkItemAppleScript" },
+            "properties": [
+              {
+                "name": "id",
+                "code": "ID  ",
+                "description": "Unique ID of the bookmark item.",
+                "type": "text",
+                "access": "r",
+                "cocoa": { "key": "uniqueID" }
+              },
+              {
+                "name": "title",
+                "code": "pnam",
+                "description": "The title of the bookmark item.",
+                "type": "text"
+              },
+              {
+                "name": "URL",
+                "code": "URL ",
+                "description": "The URL of the bookmark.",
+                "type": "text"
+              },
+              {
+                "name": "index",
+                "code": "pidx",
+                "description": "Returns the index with respect to its parent bookmark folder.",
+                "type": "number",
+                "access": "r",
+                "cocoa": { "key": "index" }
+              }
+            ]
+          }
+        ],
+        "commands": [
+          { "name": "reload",        "code": "CrSuRlod", "description": "Reload a tab.",            "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "go back",       "code": "CrSuBack", "description": "Go Back (If Possible).",    "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "go forward",    "code": "CrSuFwd ", "description": "Go Forward (If Possible).", "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "select all",    "code": "CrSuSlAl", "description": "Select all.",               "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "cut selection", "code": "CrSuCut ", "description": "Cut selected text (If Possible).", "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "copy selection","code": "CrSuCop ", "description": "Copy text.",                 "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "paste selection","code": "CrSuPast","description": "Paste text (If Possible).",  "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "undo",          "code": "CrSuUndo", "description": "Undo the last change.",      "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "redo",          "code": "CrSuRedo", "description": "Redo the last change.",      "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "stop",          "code": "CrSustop", "description": "Stop the current tab from loading.", "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          { "name": "view source",   "code": "CrSuVSrc", "description": "View the HTML source of the tab.",    "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" } },
+          {
+            "name": "execute",
+            "code": "CrSuExJa",
+            "description": "Execute a piece of javascript.",
+            "directParameter": { "description": "The tab to execute the command in.", "type": "specifier" },
+            "parameters": [
+              {
+                "name": "javascript",
+                "code": "JvSc",
+                "description": "The javascript code to execute.",
+                "type": "text",
+                "cocoa": { "key": "javascript" }
+              }
+            ],
+            "result": { "type": "any" }
+          }
+        ]
+      }
+    ]
+  }
+}
